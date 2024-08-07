@@ -13,8 +13,8 @@ use App\Http\Controllers\PromoController;
 |
 */
 
-Route::resource('promo', PromoController::class);
-
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('promo.index');
 });
+
+Route::resource('promo', PromoController::class);
