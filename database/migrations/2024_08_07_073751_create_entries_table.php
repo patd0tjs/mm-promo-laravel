@@ -19,7 +19,7 @@ class CreateEntriesTable extends Migration
             $table->string('email', 50);
             $table->string('name', 50);
             $table->string('address');
-            $table->date('bday');
+            $table->date('birthday');
             $table->enum('status', ['0','1', '2'])->default('0');
             $table->timestamps();
         });
