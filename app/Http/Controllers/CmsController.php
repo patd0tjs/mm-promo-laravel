@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Entries;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CmsController extends Controller
 {
@@ -25,7 +26,13 @@ class CmsController extends Controller
 
     public function dashboard()
     {
-        return view('cms.dashboard');
+        $entries = DB::table('entries')
+                        ->select(DB::raw('count(id) as total, date(created_at) as date'))
+                        ->where('status', '1')
+                        ->groupBy('date')
+                        ->get();
+
+        return view('cms.dashboard', compact('entries'));
     }
 
     public function entries()
