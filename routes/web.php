@@ -21,6 +21,7 @@ Route::get('/', function () {
 Route::resource('promo', PromoController::class);
 
 // cms routes
-Route::get('/cms/entries', [CmsController::class, 'entries']);
 Route::get('/cms/dashboard', [CmsController::class, 'dashboard']);
+Route::get('/cms/entries', [CmsController::class, 'entries']);
+Route::get('/cms/draw', [CmsController::class, 'draw']);
 Route::resource('cms', CmsController::class);

@@ -14,7 +14,7 @@ class CmsController extends Controller
      */
     public function index()
     {
-        return view('cms.entries');
+        return redirect('cms/dashboard');
     }
 
     /**
@@ -25,11 +25,19 @@ class CmsController extends Controller
 
     public function dashboard()
     {
-         return view('cms.dashboard');
+        return view('cms.dashboard');
     }
+
     public function entries()
     {
-        return view('cms.entries');
+        $entries = Entries::get();
+
+        return view('cms.entries', compact('entries'));
+    }
+
+    public function draw()
+    {
+        return view('cms.draw');
     }
 
     /**

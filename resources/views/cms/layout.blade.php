@@ -37,7 +37,7 @@
         <div class="l-navbar" id="nav-bar">
             <nav class="nav">
                 <div>
-                    <a href="#" class="nav_logo">
+                    <a href="/cms" class="nav_logo">
                         <i class='bx bx-layer nav_logo-icon'></i>
                         <span class="nav_logo-name">Mob1l Promo CMS</span>
                     </a>
@@ -66,4 +66,8 @@
             @yield('content')
         </div>
     </body>
+
+    <script>
+        new DataTable('.table');
+    </script>
 </html>
