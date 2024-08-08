@@ -82,7 +82,20 @@ class CmsController extends Controller
      */
     public function update(Request $request, Entries $entries)
     {
-        //
+        $request->validate([
+            "status" => "required"
+        ]);
+
+        Entries::where('id', $_POST['id'])->update(['status' => $_POST['status']]);
+
+        if($_POST['status'] == "1")
+        {
+            $message = 'accepted';
+        } else {
+            $message = 'rejected';
+        }
+
+        return redirect('cms/entries')->with('message', $message);
     }
 
     /**

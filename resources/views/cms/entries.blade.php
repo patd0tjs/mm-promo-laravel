@@ -4,6 +4,12 @@
 
     <h4>Entries</h4>
 
+    @if ($message = Session::get('message'))
+        <div class="alert alert-warning">
+            Entry {{ $message }} successfully!
+        </div>
+    @endif
+
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
             <h2 class="accordion-header">
@@ -29,13 +35,36 @@
                             <tbody>
                                 @foreach ($entries as $entry)
                                     @if ($entry->status == '0')
-                                        <td>{{ $entry->name }}</td>
-                                        <td>{{ $entry->mobile }}</td>
-                                        <td>{{ $entry->email }}</td>
-                                        <td>{{ $entry->birthday }}</td>
-                                        <td>{{ $entry->address }}</td>
-                                        <td>{{ $entry->created_at }}</td>
-                                        <td></td>
+                                        <tr>
+                                            <td>{{ $entry->name }}</td>
+                                            <td>{{ $entry->mobile }}</td>
+                                            <td>{{ $entry->email }}</td>
+                                            <td>{{ $entry->birthday }}</td>
+                                            <td>{{ $entry->address }}</td>
+                                            <td>{{ $entry->created_at }}</td>
+                                            <td>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <form action="{{ route('cms.update', $entry->id) }}" method="post">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <input type="hidden" name="status" value="1">
+                                                            <input type="hidden" name="id" value="{{ $entry->id }}">
+                                                            <button type="submit" class="btn btn-success">Accept</button>
+                                                        </form>
+                                                    </div>
+                                                    <div class="col">
+                                                        <form action="{{ route('cms.update', $entry->id) }}" method="post">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <input type="hidden" name="status" value="2">
+                                                            <input type="hidden" name="id" value="{{ $entry->id }}">
+                                                            <button type="submit" class="btn btn-danger">Reject</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     @endif
                                 @endforeach
                             </tbody>
@@ -68,6 +97,7 @@
                             <tbody>
                                 @foreach ($entries as $entry)
                                     @if ($entry->status == '1')
+                                    <tr>
                                         <td>{{ $entry->name }}</td>
                                         <td>{{ $entry->mobile }}</td>
                                         <td>{{ $entry->email }}</td>
@@ -75,6 +105,7 @@
                                         <td>{{ $entry->address }}</td>
                                         <td>{{ $entry->created_at }}</td>
                                         <td>{{ $entry->updated_at }}</td>
+                                    </tr>
                                     @endif
                                 @endforeach
                             </tbody>
@@ -107,13 +138,15 @@
                             <tbody>
                                 @foreach ($entries as $entry)
                                     @if ($entry->status == '2')
-                                        <td>{{ $entry->name }}</td>
-                                        <td>{{ $entry->mobile }}</td>
-                                        <td>{{ $entry->email }}</td>
-                                        <td>{{ $entry->birthday }}</td>
-                                        <td>{{ $entry->address }}</td>
-                                        <td>{{ $entry->created_at }}</td>
-                                        <td>{{ $entry->updated_at }}</td>
+                                        <tr>
+                                            <td>{{ $entry->name }}</td>
+                                            <td>{{ $entry->mobile }}</td>
+                                            <td>{{ $entry->email }}</td>
+                                            <td>{{ $entry->birthday }}</td>
+                                            <td>{{ $entry->address }}</td>
+                                            <td>{{ $entry->created_at }}</td>
+                                            <td>{{ $entry->updated_at }}</td>
+                                        </tr>
                                     @endif
                                 @endforeach
                             </tbody>
