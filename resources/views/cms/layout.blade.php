@@ -6,6 +6,8 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Mobil 1 Promo CMS</title>
 
+        <link rel="shortcut icon" href="https://dev.megabots.app/cmspromo/assets/img/fav.png">
+
         <!-- jquery -->
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 
@@ -21,9 +23,9 @@
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 
-        <link rel="stylesheet" href="{{ URL::asset('assets/template.css') }}">
+        <link rel="stylesheet" href="{{ URL::asset('assets/cms/template.css') }}">
 
-        <script type="text/javascript" src="{{ URL::asset('assets/template.js') }}"></script>
+        <script type="text/javascript" src="{{ URL::asset('assets/cms/template.js') }}"></script>
     </head>
     <body id="body-pd">
         <header class="header" id="header">

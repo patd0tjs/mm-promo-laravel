@@ -1,0 +1,97 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+}
+
+/* main content */
+#main {
+  background-image: url(./img/bg_new.png);
+  background-size: cover;
+  max-width: 414px;
+}
+
+/* header image */
+#header_img {
+  width: 100%;
+}
+
+p.text-size {
+  text-align: center;
+}
+
+#reg_form {
+  padding: 10px;
+}
+.row {
+  width: 100%;
+}
+
+label {
+  text-align: left;
+}
+
+.text-size {
+  font-size: 12px;
+}
+
+input {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+select {
+  margin-bottom: 5px;
+}
+
+#upload_btn {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+#submit {
+  width: 100%;
+}
+
+#footer {
+  padding: 10px;
+  padding-top: 0;
+}
+
+.footer-links {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  font-size: 11px;
+}
+
+/* for mechanics page */
+#mechanics {
+  text-align: left;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 5px;
+}
+
+/* contact us page */
+#contact {
+  padding: 10px 10%;
+  height: 100vh;
+}
+
+#contact_box {
+  border-radius: 25px;
+  padding: 10px;
+}
+
+.mech-pop {
+  background-image: url(./img/bg_new.png);
+  background-size: cover;
+}
