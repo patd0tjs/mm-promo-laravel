@@ -27,6 +27,16 @@ class PromoController extends Controller
         //
     }
 
+    public function contact()
+    {
+        return view('promo.contact');
+    }
+
+    public function mechanics()
+    {
+        return view('promo.mechanics');
+    }
+
     /**
      * Store a newly created resource in storage.
      *

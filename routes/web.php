@@ -18,6 +18,8 @@ use App\Http\Controllers\CmsController;
 Route::get('/', function () {
     return redirect()->route('promo.index');
 });
+Route::get('/contact', [PromoController::class, 'contact']);
+Route::get('/mechanics', [PromoController::class, 'mechanics']);
 Route::resource('promo', PromoController::class);
 
 // cms routes

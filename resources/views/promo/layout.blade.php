@@ -29,32 +29,33 @@
             <center>
                 <img src={{ URL::asset('assets/promo/img/header_new.png') }} id="header_img">
                 @yield('content')
-            </center>
 
-            <!-- links -->
-            <div id="footer">
-                <div class="row">
-                    <div class="col">
-                        <a href="mechanics" class="footer-links">Mechanics</a>
+
+                <!-- links -->
+                <div id="footer">
+                    <div class="row">
+                        <div class="col">
+                            <a href="mechanics" class="footer-links">Mechanics</a>
+                        </div>
+                        <div class="col-6">
+                            <a type="button" class="footer-links" data-bs-toggle="modal" data-bs-target="#products">See List of Participating Stores</a>
+                        </div>
+                        <div class="col">
+                            <a href="contact" class="footer-links">Contact Us</a>
+                        </div>
                     </div>
-                    <div class="col-6">
-                        <a type="button" class="footer-links" data-bs-toggle="modal" data-bs-target="#products">See List of Participating Stores</a>
-                    </div>
-                    <div class="col">
-                        <a href="contact" class="footer-links">Contact Us</a>
+                    <br>
+                    <div class="row">
+                        <div class="col">
+                            <p class="text-size">
+                                DTI Fair Trade Permit No. FTEB-172583 Series of 2023
+                                <br>
+                                Promo runs from August 1 - October 15, 2023
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <br>
-                <div class="row">
-                    <div class="col">
-                        <p class="text-size">
-                            DTI Fair Trade Permit No. FTEB-172583 Series of 2023
-                            <br>
-                            Promo runs from August 1 - October 15, 2023
-                        </p>
-                    </div>
-                </div>
-            </div>
+            </center>
 
             <div class="modal fade" id="products" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="popupLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
