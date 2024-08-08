@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <form action="{{ route('cms.store') }}" id="reg_form" enctype="multipart/form-data" method="post">
+    <form action="{{ route('promo.store') }}" id="reg_form" enctype="multipart/form-data" method="post">
         @csrf
         <p class="text-size" style="font-size: 9px">
             Please provide the following details.
@@ -13,9 +13,8 @@
         </p>
 
         @if($errors->any())
-            <div class="alert alert-danger">
+            <div class="alert alert-danger" style="text-align: left">
                 There was a problem with your request.
-
                 <ul>
                     @foreach($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -86,7 +85,7 @@
                 <div align="left">
                     <label>*Birthday</label>
                 </div>
-                <input type="date" name="bday" max="" id="birthday" class="form-control text-size" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Age should be 18 years old and above')" required>
+                <input type="date" name="birthday" max="" id="birthday" class="form-control text-size" oninput="setCustomValidity('')" oninvalid="setCustomValidity('Age should be 18 years old and above')" required>
             </div>
         </div>
 
@@ -135,7 +134,7 @@
         <div class="row">
             <center>
                 <div class="col">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="agreement" required>
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" required>
                     <label class="form-check-label" for="flexCheckDefault">
                         By registering I agree to McKupler's
                     </label>
@@ -151,7 +150,7 @@
         <br>
         <div class="row">
             <div class="col">
-            <input type="submit" class="btn btn-primary" value="Submit" id="submit" disabled>
+            <input type="submit" class="btn btn-primary" value="Submit" id="submit">
             </div>
         </div>
     </form>
@@ -165,7 +164,6 @@
             <div class="modal-content" style="background-color: #6477AB;">
                 <div class="modal-body">
                     <h6 style="color: white">
-                        <?php if($this->session->flashdata('popup') == 'success'){?>
                             Thank you for joining Race to MotoGP with Mobil.
                             <br>
                             We have received your e-raffle entry.
@@ -177,8 +175,6 @@
                             <br>
                             <br>
                             Send more entries now!
-
-                        <?php } else { echo $this->session->flashdata('popup');} ?>
                     </h6>
                     <br>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
@@ -627,17 +623,17 @@
     }
     };
 
-    function atLeastOne() {
-        let submit = document.getElementById("submit");
-        let _racing = document.getElementById("racing").value;
-        let _super = document.getElementById("super").value;
+    // function atLeastOne() {
+    //     let submit = document.getElementById("submit");
+    //     let _racing = document.getElementById("racing").value;
+    //     let _super = document.getElementById("super").value;
 
-        if (_super <= 0 && _racing <= 0) {
-            submit.disabled = true;
-        } else {
-            submit.disabled = false;
-        }
-    }
+    //     if (_super <= 0 && _racing <= 0) {
+    //         submit.disabled = true;
+    //     } else {
+    //         submit.disabled = false;
+    //     }
+    // }
 
     function setMaxDate() {
       var today = new Date();
