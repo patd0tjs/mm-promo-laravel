@@ -44,7 +44,7 @@
         </div>
 
         <!-- locations -->
-        {{-- <div class="row">
+        <div class="row">
             <div class="col-6">
                 <div align="left">
                     <label>*Province</label>
@@ -57,7 +57,7 @@
                 </div>
                 <select id="city" class="form-control text-size" name="city" required></select>
             </div>
-        </div> --}}
+        </div>
 
         <!-- mobile -->
         <div class="row">
