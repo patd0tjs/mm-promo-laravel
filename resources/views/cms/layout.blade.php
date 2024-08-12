@@ -33,7 +33,7 @@
                 <i class='bx bx-menu' id="header-toggle"></i>
             </div>
             <div class="header_img">
-                test
+                {{ Auth::user()->name }}
             </div>
         </header>
         <div class="l-navbar" id="nav-bar">
@@ -58,10 +58,19 @@
                         </a>
                     </div>
                 </div>
-                <a href="" class="nav_link">
-                    <i class='bx bx-log-out nav_icon'></i>
-                    <span class="nav_name">Logout</span>
-                </a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+
+                    <x-responsive-nav-link :href="route('logout')"
+                            onclick="event.preventDefault();
+                                        this.closest('form').submit();" 
+                            
+                            class="nav_link">
+
+                            <i class='bx bx-log-out nav_icon'></i>
+                            <span class="nav_name">Logout</span>
+                    </x-responsive-nav-link>
+                </form>
             </nav>
         </div>
         <div class="height-100 bg-light">

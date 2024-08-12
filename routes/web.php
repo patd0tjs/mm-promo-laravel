@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PromoController;
 use App\Http\Controllers\CmsController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,14 +20,21 @@ use App\Http\Controllers\CmsController;
 Route::get('/', function () {
     return redirect()->route('promo.index');
 });
+
 Route::get('/contact', [PromoController::class, 'contact']);
 Route::get('/mechanics', [PromoController::class, 'mechanics']);
 Route::resource('promo', PromoController::class);
 
 // cms routes
-Route::get('/cms/dashboard', [CmsController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
-Route::get('/cms/entries', [CmsController::class, 'entries']);
-Route::get('/cms/draw', [CmsController::class, 'draw']);
+Route::get('/cms/dashboard', [CmsController::class, 'dashboard'])->middleware(['auth']);
+Route::get('/cms/entries', [CmsController::class, 'entries'])->middleware(['auth']);
+Route::get('/cms/draw', [CmsController::class, 'draw'])->middleware(['auth']);
+
+Route::get('cms/login', [AuthenticatedSessionController::class, 'create'])
+->name('cms/login');
+
+Route::post('login', [AuthenticatedSessionController::class, 'store']);
+
 Route::resource('cms', CmsController::class);
 
 
