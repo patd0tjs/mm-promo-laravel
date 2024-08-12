@@ -19,9 +19,13 @@ class CreateEntriesTable extends Migration
             $table->string('email', 50);
             $table->string('name', 50);
             $table->string('address');
+            $table->string('province');
+            $table->string('city');
+            $table->string('location');
             $table->date('birthday');
             $table->enum('status', ['0','1', '2'])->default('0');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
     }
 

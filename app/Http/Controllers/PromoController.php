@@ -46,14 +46,17 @@ class PromoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'      => 'required',
-            'address'   => 'required',
-            'mobile'    => 'required',
-            'email'     => 'required',
-            'birthday'  => 'required'
+            'f_name'   => 'required',
+            'l_name'   => 'required',
+            'address'  => 'required',
+            'mobile'   => 'required',
+            'email'    => 'required',
+            'birthday' => 'required',
+            'province' => 'required',
+            'city'     => 'required'
         ]);
 
-        Entries::create($request->all());
+        Entries::join($request);
 
         return redirect()->route('promo.index')->with('joined', "Your entry has been successfully submitted");
     }

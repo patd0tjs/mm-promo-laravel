@@ -27,9 +27,16 @@
         <div class="row">
             <div class="col">
                 <div align="left">
-                    <label>*Full Name:</label>
+                    <label>*First Name:</label>
                 </div>
-                <input type="text" class="form-control text-size" name="name" pattern="[a-zA-Z\s]+" title="Letters and spaces only" required>
+                <input type="text" class="form-control text-size name" name="f_name" pattern="[a-zA-Z\s]+" title="Letters and spaces only" required>
+            </div>
+
+            <div class="col">
+                <div align="left">
+                    <label>*Last Name:</label>
+                </div>
+                <input type="text" class="form-control text-size name" name="l_name" pattern="[a-zA-Z\s]+" title="Letters and spaces only" required>
             </div>
         </div>
 
@@ -90,7 +97,7 @@
         </div>
 
         <!-- product select -->
-        {{-- <div class="row">
+        <div class="row">
             <div align="left">
                 <label>*Participating Product/s</label>
             </div>
@@ -110,10 +117,10 @@
             <div class="col">
                 <input type="text" class="form-control text-size" value="Mobil Super Moto 800ml or 1 liter" readonly>
             </div>
-        </div> --}}
+        </div>
 
         <!-- receipt upload -->
-        {{-- <div class="row">
+        <div class="row">
             <div align="left">
                 <label for="">
                     *Upload Receipt
@@ -128,7 +135,7 @@
                     <input type="file"  name="receipt" accept="image/*" id="receipt" class="form-control" required>
                 </div>
             </div>
-        </div> --}}
+        </div>
 
         <!-- t&c -->
         <div class="row">
@@ -150,7 +157,7 @@
         <br>
         <div class="row">
             <div class="col">
-            <input type="submit" class="btn btn-primary" value="Submit" id="submit">
+            <input type="submit" class="btn btn-primary" value="Submit" id="submit" disabled>
             </div>
         </div>
     </form>
@@ -623,17 +630,17 @@
     }
     };
 
-    // function atLeastOne() {
-    //     let submit = document.getElementById("submit");
-    //     let _racing = document.getElementById("racing").value;
-    //     let _super = document.getElementById("super").value;
+    function atLeastOne() {
+        let submit = document.getElementById("submit");
+        let _racing = document.getElementById("racing").value;
+        let _super = document.getElementById("super").value;
 
-    //     if (_super <= 0 && _racing <= 0) {
-    //         submit.disabled = true;
-    //     } else {
-    //         submit.disabled = false;
-    //     }
-    // }
+        if (_super <= 0 && _racing <= 0) {
+            submit.disabled = true;
+        } else {
+            submit.disabled = false;
+        }
+    }
 
     function setMaxDate() {
       var today = new Date();
