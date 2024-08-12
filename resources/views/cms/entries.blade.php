@@ -21,11 +21,16 @@
                         <table class="table table-stripped" id="entries">
                             <thead>
                                 <tr>
+                                    <th>Receipt</th>
+                                    <th>Mobil 1 Racing</th>
+                                    <th>Mobil Super Moto</th>
                                     <th>Name</th>
                                     <th>Mobile</th>
                                     <th>Email</th>
                                     <th>Birthday</th>
                                     <th>Address</th>
+                                    <th>City</th>
+                                    <th>Province</th>
                                     <th>Stamp</th>
                                     <th></th>
                                 </tr>
@@ -34,11 +39,33 @@
                                 @foreach ($entries as $entry)
                                     @if ($entry->status == '0')
                                         <tr>
+                                            <td>
+                                                <img src="{{ URL::asset('receipts') . '/' . $entry->receipt_img }}" class="img-fluid" role="button" data-bs-toggle="modal" data-bs-target="#img_pop{{ $entry->id }}">
+                                            
+                                                <!-- image popup view -->
+                                                <div class="modal fade" id="img_pop{{ $entry->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="img_pop{{ $entry->id }}Label" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="img_pop{{ $entry->id }}Label">View Receipt</h1>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <img src="{{ URL::asset('receipts') . '/' . $entry->receipt_img }}" class="img-fluid">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>{{ $entry->has_racing }}</td>
+                                            <td>{{ $entry->has_super }}</td>
                                             <td>{{ $entry->name }}</td>
                                             <td>{{ $entry->mobile }}</td>
                                             <td>{{ $entry->email }}</td>
                                             <td>{{ $entry->birthday }}</td>
                                             <td>{{ $entry->address }}</td>
+                                            <td>{{ $entry->city }}</td>
+                                            <td>{{ $entry->province }}</td>
                                             <td>{{ $entry->created_at }}</td>
                                             <td>
                                                 <div class="row">
@@ -83,11 +110,16 @@
                         <table class="table table-stripped" id="accepted">
                             <thead>
                                 <tr>
+                                    <th>Receipt</th>
+                                    <th>Mobil 1 Racing</th>
+                                    <th>Mobil Super Moto</th>
                                     <th>Name</th>
                                     <th>Mobile</th>
                                     <th>Email</th>
                                     <th>Birthday</th>
                                     <th>Address</th>
+                                    <th>City</th>
+                                    <th>Province</th>
                                     <th>Stamp</th>
                                     <th>Accepted On</th>
                                 </tr>
@@ -95,12 +127,34 @@
                             <tbody>
                                 @foreach ($entries as $entry)
                                     @if ($entry->status == '1')
-                                    <tr>
+                                    <tr>                          
+                                        <td>
+                                            <img src="{{ URL::asset('receipts') . '/' . $entry->receipt_img }}" class="img-fluid" role="button" data-bs-toggle="modal" data-bs-target="#img_pop{{ $entry->id }}">
+                                        
+                                            <!-- image popup view -->
+                                            <div class="modal fade" id="img_pop{{ $entry->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="img_pop{{ $entry->id }}Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="img_pop{{ $entry->id }}Label">View Receipt</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <img src="{{ URL::asset('receipts') . '/' . $entry->receipt_img }}" class="img-fluid">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>{{ $entry->has_racing }}</td>
+                                        <td>{{ $entry->has_super }}</td>
                                         <td>{{ $entry->name }}</td>
                                         <td>{{ $entry->mobile }}</td>
                                         <td>{{ $entry->email }}</td>
                                         <td>{{ $entry->birthday }}</td>
                                         <td>{{ $entry->address }}</td>
+                                        <td>{{ $entry->city }}</td>
+                                        <td>{{ $entry->province }}</td>
                                         <td>{{ $entry->created_at }}</td>
                                         <td>{{ $entry->updated_at }}</td>
                                     </tr>
@@ -124,11 +178,16 @@
                         <table class="table table-stripped" id="rejected">
                             <thead>
                                 <tr>
+                                    <th>Receipt</th>
+                                    <th>Mobil 1 Racing</th>
+                                    <th>Mobil Super Moto</th>
                                     <th>Name</th>
                                     <th>Mobile</th>
                                     <th>Email</th>
                                     <th>Birthday</th>
                                     <th>Address</th>
+                                    <th>City</th>
+                                    <th>Province</th>
                                     <th>Stamp</th>
                                     <th>Rejected On</th>
                                 </tr>
@@ -137,11 +196,33 @@
                                 @foreach ($entries as $entry)
                                     @if ($entry->status == '2')
                                         <tr>
+                                            <td>
+                                                <img src="{{ URL::asset('receipts') . '/' . $entry->receipt_img }}" class="img-fluid" role="button" data-bs-toggle="modal" data-bs-target="#img_pop{{ $entry->id }}">
+                                            
+                                                <!-- image popup view -->
+                                                <div class="modal fade" id="img_pop{{ $entry->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="img_pop{{ $entry->id }}Label" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="img_pop{{ $entry->id }}Label">View Receipt</h1>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <img src="{{ URL::asset('receipts') . '/' . $entry->receipt_img }}" class="img-fluid">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>{{ $entry->has_racing }}</td>
+                                            <td>{{ $entry->has_super }}</td>
                                             <td>{{ $entry->name }}</td>
                                             <td>{{ $entry->mobile }}</td>
                                             <td>{{ $entry->email }}</td>
                                             <td>{{ $entry->birthday }}</td>
                                             <td>{{ $entry->address }}</td>
+                                            <td>{{ $entry->city }}</td>
+                                            <td>{{ $entry->province }}</td>
                                             <td>{{ $entry->created_at }}</td>
                                             <td>{{ $entry->updated_at }}</td>
                                         </tr>
