@@ -15,7 +15,7 @@ class CreateEntriesTable extends Migration
     {
         Schema::create('entries', function (Blueprint $table) {
             $table->id();
-            $table->string('mobile', 11);
+            $table->string('mobile', 11)->unique();
             $table->string('email', 50);
             $table->string('name', 50);
             $table->string('address');
@@ -23,6 +23,9 @@ class CreateEntriesTable extends Migration
             $table->string('city');
             $table->string('location');
             $table->date('birthday');
+            $table->unsignedSmallInteger('has_racing');
+            $table->unsignedSmallInteger('has_super');
+            $table->string('receipt_img');
             $table->enum('status', ['0','1', '2'])->default('0');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

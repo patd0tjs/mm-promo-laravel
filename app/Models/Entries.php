@@ -23,15 +23,24 @@ class Entries extends Model
 
     public function join($request)
     {
+        // receipt uploader
+        $receipt = $request->file('receipt');
+        $ext = $receipt->getClientOriginalExtension();
+        $filename = time() . '.' . $ext;
+        $receipt->move('receipts/', $filename);
+
         DB::table('entries')->insert([
-            'mobile'   => $request->input('mobile'),
-            'email'    => $request->input('email'),
-            'name'     => $request->input('f_name') . ' ' . $request->input('l_name'),
-            'address'  => $request->input('address'),
-            'province' => $request->input('province'),
-            'city'     => $request->input('city'),
-            'location' => Entries::getProvinceLocation($request->input('province')),
-            'birthday' => $request->input('birthday')
+            'mobile'      => $request->input('mobile'),
+            'email'       => $request->input('email'),
+            'name'        => $request->input('f_name') . ' ' . $request->input('l_name'),
+            'address'     => $request->input('address'),
+            'province'    => $request->input('province'),
+            'city'        => $request->input('city'),
+            'location'    => Entries::getProvinceLocation($request->input('province')),
+            'birthday'    => $request->input('birthday'),
+            'has_racing'  => $request->input('racing'),
+            'has_super'   => $request->input('super'),
+            'receipt_img' => $filename
         ]);
     }
 

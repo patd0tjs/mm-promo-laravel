@@ -29,22 +29,6 @@ Route::get('/cms/dashboard', [CmsController::class, 'dashboard'])->middleware(['
 Route::get('/cms/entries', [CmsController::class, 'entries'])->middleware(['auth']);
 Route::get('/cms/draw', [CmsController::class, 'draw'])->middleware(['auth']);
 
-// Route::get('cms/login', [AuthenticatedSessionController::class, 'create'])
-// ->name('cms/login');
-
-// Route::post('login', [AuthenticatedSessionController::class, 'store']);
-
-
-
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth'])->name('dashboard');
-
 require __DIR__.'/auth.php';
 
 Route::resource('cms', CmsController::class);
