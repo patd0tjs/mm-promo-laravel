@@ -44,15 +44,15 @@
                         <span class="nav_logo-name">Mob1l Promo CMS</span>
                     </a>
                     <div class="nav_list">
-                        <a href="dashboard" class="nav_link">
+                        <a href="dashboard" class="nav_link {{ ($page == "Dashboard") ? 'active' : '' }}">
                             <i class='bx bx-grid-alt nav_icon'></i>
                             <span class="nav_name">Dashboard</span>
                         </a>
-                        <a href="entries" class="nav_link">
+                        <a href="entries" class="nav_link {{ ($page == "Entries") ? 'active' : '' }}">
                             <i class='bx bx-user nav_icon'></i>
                             <span class="nav_name">Entries</span>
                         </a>
-                        <a href="draw" class="nav_link">
+                        <a href="draw" class="nav_link {{ ($page == "Draw Tool") ? 'active' : '' }}">
                             <i class='bx bx-message-square-detail nav_icon'></i>
                             <span class="nav_name">Draw Tool</span>
                         </a>
@@ -74,6 +74,7 @@
             </nav>
         </div>
         <div class="height-100 bg-light">
+            <h4>{{ $page }}</h4>
             @yield('content')
         </div>
     </body>

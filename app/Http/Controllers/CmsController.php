@@ -32,19 +32,31 @@ class CmsController extends Controller
                         ->groupBy('date')
                         ->get();
 
-        return view('cms.dashboard', compact('entries'));
+        $data = [
+            'page'    => 'Dashboard',
+            'entries' => $entries
+        ];
+
+        return view('cms.dashboard', $data);
     }
 
     public function entries()
     {
-        $entries = Entries::get();
+        $data = [
+            'page'    => 'Entries',
+            'entries' => Entries::get()
+        ];
 
-        return view('cms.entries', compact('entries'));
+        return view('cms.entries', $data);
     }
 
     public function draw()
     {
-        return view('cms.draw');
+        $data = [
+            'page' => 'Draw Tool'
+        ];
+
+        return view('cms.draw', $data);
     }
 
     /**

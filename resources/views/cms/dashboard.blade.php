@@ -8,8 +8,6 @@
 
 @section('content')
 
-    <h4>Dashboard</h4>
-
     <div id="entries" style="width:100%; height:400px;"></div>
 
     <script>

@@ -2,8 +2,6 @@
 
 @section('content')
 
-    <h4>Entries</h4>
-
     @if ($message = Session::get('message'))
         <div class="alert alert-warning">
             Entry {{ $message }} successfully!
