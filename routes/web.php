@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PromoController;
 use App\Http\Controllers\CmsController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,7 +24,18 @@ Route::get('/mechanics', [PromoController::class, 'mechanics']);
 Route::resource('promo', PromoController::class);
 
 // cms routes
-Route::get('/cms/dashboard', [CmsController::class, 'dashboard']);
+Route::get('/cms/dashboard', [CmsController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 Route::get('/cms/entries', [CmsController::class, 'entries']);
 Route::get('/cms/draw', [CmsController::class, 'draw']);
 Route::resource('cms', CmsController::class);
+
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
