@@ -24,90 +24,90 @@ class Entries extends Model
     private static $ncr = array('Metro Manila');
 
     private static $luzon = array(
-        'Abra', 
-        'Albay', 
-        'Apayao', 
-        'Aurora', 
-        'Bataan', 
-        'Batanes', 
-        'Batangas', 
-        'Benguet', 
-        'Bulacan', 
-        'Cagayan', 
-        'Camarines Norte', 
-        'Camarines Sur', 
-        'Catanduanes', 
-        'Cavite', 
-        'Ifugao', 
-        'Ilocos Norte', 
-        'Ilocos Sur', 
-        'Isabela', 
-        'Kalinga', 
-        'La Union', 
-        'Laguna', 
-        'Marinduque', 
-        'Masbate', 
-        'Mountain Province', 
-        'Nueva Ecija', 
-        'Nueva Vizcaya', 
-        'Occidental Mindoro', 
-        'Oriental Mindoro', 
-        'Palawan', 
-        'Pampanga', 
-        'Pangasinan', 
-        'Quezon', 
-        'Quirino', 
-        'Rizal', 
-        'Romblon', 
-        'Tarlac', 
+        'Abra',
+        'Albay',
+        'Apayao',
+        'Aurora',
+        'Bataan',
+        'Batanes',
+        'Batangas',
+        'Benguet',
+        'Bulacan',
+        'Cagayan',
+        'Camarines Norte',
+        'Camarines Sur',
+        'Catanduanes',
+        'Cavite',
+        'Ifugao',
+        'Ilocos Norte',
+        'Ilocos Sur',
+        'Isabela',
+        'Kalinga',
+        'La Union',
+        'Laguna',
+        'Marinduque',
+        'Masbate',
+        'Mountain Province',
+        'Nueva Ecija',
+        'Nueva Vizcaya',
+        'Occidental Mindoro',
+        'Oriental Mindoro',
+        'Palawan',
+        'Pampanga',
+        'Pangasinan',
+        'Quezon',
+        'Quirino',
+        'Rizal',
+        'Romblon',
+        'Tarlac',
         'Zambales');
 
     private static $visayas = array(
-        'Aklan', 
-        'Antique', 
-        'Biliran', 
-        'Bohol', 
-        'Capiz', 
-        'Cebu', 
-        'Eastern Samar', 
-        'Guimaras', 
-        'Iloilo', 
-        'Leyte', 
-        'Negros Occidental', 
-        'Negros Oriental', 
-        'Northern Samar', 
-        'Samar', 
-        'Siquijor', 
-        'Sorsogon', 
+        'Aklan',
+        'Antique',
+        'Biliran',
+        'Bohol',
+        'Capiz',
+        'Cebu',
+        'Eastern Samar',
+        'Guimaras',
+        'Iloilo',
+        'Leyte',
+        'Negros Occidental',
+        'Negros Oriental',
+        'Northern Samar',
+        'Samar',
+        'Siquijor',
+        'Sorsogon',
         'Southern Leyte');
 
     private static $mindanao = array(
-        'Agusan del Norte', 
-        'Agusan del Sur', 
-        'Basilan', 
-        'Bukidnon', 
-        'Camiguin', 
-        'Compostela Valley', 
-        'Cotabato', 
-        'Davao del Norte', 
-        'Davao del Sur', 
-        'Davao Oriental', 
-        'Dinagat Islands', 
-        'Lanao del Norte', 
-        'Lanao del Sur', 
-        'Maguindanao', 
-        'Misamis Occidental', 
-        'Misamis Oriental', 
-        'Sarangani', 
-        'Shariff Kabunsuan', 
-        'South Cotabato', 
-        'Sultan Kudarat', 
-        'Sulu', 
-        'Surigao del Norte', 
-        'Surigao del Sur', 
-        'Tawi-Tawi', 
-        'Zamboanga del Norte', 
-        'Zamboanga del Sur', 
+        'Agusan del Norte',
+        'Agusan del Sur',
+        'Basilan',
+        'Bukidnon',
+        'Camiguin',
+        'Compostela Valley',
+        'Cotabato',
+        'Davao del Norte',
+        'Davao del Sur',
+        'Davao Oriental',
+        'Dinagat Islands',
+        'Lanao del Norte',
+        'Lanao del Sur',
+        'Maguindanao',
+        'Misamis Occidental',
+        'Misamis Oriental',
+        'Sarangani',
+        'Shariff Kabunsuan',
+        'South Cotabato',
+        'Sultan Kudarat',
+        'Sulu',
+        'Surigao del Norte',
+        'Surigao del Sur',
+        'Tawi-Tawi',
+        'Zamboanga del Norte',
+        'Zamboanga del Sur',
         'Zamboanga Sibugay');
 
     /////////////////////
@@ -163,7 +163,7 @@ class Entries extends Model
         $purchases = Entries::getPurchaseQuantity($id);
         $racing    = $purchases->has_racing;
         $super     = $purchases->has_super;
-    
+
         if($racing > 0 || $super > 0 ){
             if($racing > 0){
                 $limit = 2 * $racing;
@@ -171,7 +171,7 @@ class Entries extends Model
                     DB::table('approved_entries')->insert(['entry_id' => $id]);
                 }
             }
-        
+
             if($super > 0){
                 for($s = 0; $s < $super; $s++){
                     DB::table('approved_entries')->insert(['entry_id' => $id]);
@@ -179,9 +179,9 @@ class Entries extends Model
             }
 
             Entries::where('id', $id)->update(['status' => '1']);
-        }  
+        }
     }
-    
+
     // get quantity of purchased products based on entry id
     private function getPurchaseQuantity($entry_id){
         return DB::table('entries')
@@ -193,7 +193,7 @@ class Entries extends Model
     // return winnerss
     public function getWinners($request){
         $candidates = Entries::getCandidates($request);
-        $winner_count = $reuest->input('winner_count');
+        $winner_count = $request->input('winner_count');
 
         // check if there are any candidates
         if($candidates){
@@ -227,22 +227,30 @@ class Entries extends Model
     private function getCandidates($request){
         $s_date = $request->input('s_date');
         $e_date = $request->input('e_date');
-        $location = $request>input('location');
+        $location = $request->input('location');
 
-        $this->db->where('date(approved_entries.stamp) >=', $s_date)
-                 ->where('date(approved_entries.stamp) <=', $e_date);
-
+        // seperate queries for specific locations. still working on alternative logic
         if($location != 'all'){
-            $this->db->where('entries.location', $location);
+            $candidates = DB::table('approved_entries')
+                                ->join('entries', 'approved_entries.entry_id', '=', 'entries.id')
+                                ->whereRaw("DATE(entries.created_at) >= '". $s_date ." 00:00:00'")
+                                ->whereRaw("DATE(entries.created_at) <= '". $e_date ." 23:59:59'")
+                                ->where('entries.location', $location)
+                                ->get()
+                                ->toArray();
+        } else {
+            $candidates = DB::table('approved_entries')
+                                ->join('entries', 'approved_entries.entry_id', '=', 'entries.id')
+                                ->whereRaw("DATE(entries.created_at) >= '". $s_date ." 00:00:00'")
+                                ->whereRaw("DATE(entries.created_at) <= '". $e_date ." 23:59:59'")
+                                ->get()
+                                ->toArray();
         }
-                               
-        $candidates = $this->db->from('approved_entries')
-                               ->join('entries', 'approved_entries.entry_id=entries.id')
-                               ->get();
 
-        $candidate = DB::select();
-        if($candidates->num_rows() > 0){
-            return $candidates->result_array();
+        $candidates = json_decode(json_encode($candidates) ,true);
+
+        if(count($candidates) > 0){
+            return $candidates;
         } else {
             return FALSE;
         }

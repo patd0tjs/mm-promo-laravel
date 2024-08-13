@@ -8,45 +8,46 @@
             <div class="row" style="width: 80%">
                 <div class="col">
                     <label for=""> Start Date</label>
-                    <input 
-                        type="date" 
-                        name="s_date" 
-                        id="start" 
-                        onchange="endDateLimiter()" 
+                    <input
+                        type="date"
+                        name="s_date"
+                        id="start"
+                        onchange="endDateLimiter()"
                         class="form-control"
-                        value="" 
-                        max="<?= date('Y-m-d')?>" 
+                        value="{{ (isset($_POST['s_date'])) ? $_POST['s_date'] : ''}}"
+                        max="{{ date('Y-m-d') }}"
                         required
                     >
                 </div>
                 <div class="col">
                     <label for="">End Date</label>
-                    <input 
-                        type="date" 
-                        name="e_date" 
-                        id="end" 
+                    <input
+                        type="date"
+                        name="e_date"
+                        id="end"
                         class="form-control"
-                        onchange="endDateLimiter()" 
-                        value="" 
-                        max="<?= date('Y-m-d')?>" 
+                        onchange="endDateLimiter()"
+                        value="{{ (isset($_POST['e_date'])) ? $_POST['e_date'] : ''}}"
+                        max="{{ date('Y-m-d') }}"
                         required
                     >
                 </div>
                 <div class="col">
                     <label for="">No. of Winners</label>
-                    <input 
-                        type="number" 
-                        name="winner_count" 
+                    <input
+                        type="number"
+                        name="winner_count"
                         class="form-control"
-                        value="" 
-                        min="1" 
+                        value="{{ (isset($_POST['winner_count'])) ? $_POST['winner_count'] : ''}}"
+                        min="1"
                         required
                     >
                 </div>
                 <div class="col">
                     <label for="">Location</label>
                     <select name="location" class="form-control" required>
-                        <option value="" selected hidden disabled>
+                        <option value="{{ (isset($_POST['location'])) ? $_POST['location'] : ''}}" selected hidden {{ (isset($_POST['location'])) ? $_POST['location'] : 'disabled'}}>
+                            {{ (isset($_POST['location'])) ? strtoupper($_POST['location']) : 'Please select a location'}}
                         </option>
                         <option value="all">ALL</option>
                         <option value="ncr">NCR</option>
@@ -66,6 +67,9 @@
     </center>
 
     <br>
+
+    @yield('winners')
+
     <script>
         function endDateLimiter(){
             let start = document.getElementById('start');

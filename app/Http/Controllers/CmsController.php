@@ -121,13 +121,12 @@ class CmsController extends Controller
 
     public function winners(Request $request, Entries $entries)
     {
-
         $data = [
             'page'    => 'Draw Tool',
-            'winners' => Entries::getWinners()
+            'winners' => Entries::getWinners($request)
         ];
 
-        return view('cms.draw', $data);
+        return view('cms.winners', $data);
     }
 
     /**
