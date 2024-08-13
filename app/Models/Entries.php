@@ -110,7 +110,9 @@ class Entries extends Model
         'Zamboanga del Sur', 
         'Zamboanga Sibugay');
 
-    // promo functions
+    /////////////////////
+    // PROMO FUNCTIONS //
+    /////////////////////
 
     // add user entry
     public function join($request)
@@ -151,6 +153,10 @@ class Entries extends Model
         }
     }
 
+    ///////////////////
+    // CMS FUNCTIONS //
+    ///////////////////
+
     // add entry to raffle
     public function acceptEntry($id)
     {
@@ -182,5 +188,63 @@ class Entries extends Model
                     ->select('has_racing', 'has_super')
                     ->where('id', $entry_id)
                     ->first();
+    }
+
+    // return winnerss
+    public function getWinners($request){
+        $candidates = Entries::getCandidates($request);
+        $winner_count = $reuest->input('winner_count');
+
+        // check if there are any candidates
+        if($candidates){
+
+            // check if number of winners is less than the defined number of winners
+            if($winner_count > count($candidates)){
+                $indexes = array_rand($candidates, count($candidates));
+            } else {
+                $indexes = array_rand($candidates, $winner_count);
+            }
+
+            $winning_array = array();
+
+            // inject winners data to winning array
+            if(is_array($indexes)){
+                for($i = 0; $i < count($indexes); $i++){
+                    array_push($winning_array, $candidates[$indexes[$i]]);
+                }
+
+            } else {
+                array_push($winning_array, $candidates[$indexes]);
+            }
+            return $winning_array;
+
+        } else {
+            return array();
+        }
+    }
+
+    // get winnners from db
+    private function getCandidates($request){
+        $s_date = $request->input('s_date');
+        $e_date = $request->input('e_date');
+        $location = $request>input('location');
+
+        $this->db->where('date(approved_entries.stamp) >=', $s_date)
+                 ->where('date(approved_entries.stamp) <=', $e_date);
+
+        if($location != 'all'){
+            $this->db->where('entries.location', $location);
+        }
+                               
+        $candidates = $this->db->from('approved_entries')
+                               ->join('entries', 'approved_entries.entry_id=entries.id')
+                               ->get();
+
+        $candidate = DB::select();
+        if($candidates->num_rows() > 0){
+            return $candidates->result_array();
+        } else {
+            return FALSE;
+        }
     }
 }

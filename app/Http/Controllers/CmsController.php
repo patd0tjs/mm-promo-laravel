@@ -119,6 +119,17 @@ class CmsController extends Controller
         return redirect('cms/entries')->with('message', $message);
     }
 
+    public function winners(Request $request, Entries $entries)
+    {
+
+        $data = [
+            'page'    => 'Draw Tool',
+            'winners' => Entries::getWinners()
+        ];
+
+        return view('cms.draw', $data);
+    }
+
     /**
      * Remove the specified resource from storage.
      *

@@ -28,6 +28,7 @@ Route::resource('promo', PromoController::class);
 Route::get('/cms/dashboard', [CmsController::class, 'dashboard'])->middleware(['auth']);
 Route::get('/cms/entries', [CmsController::class, 'entries'])->middleware(['auth']);
 Route::get('/cms/draw', [CmsController::class, 'draw'])->middleware(['auth']);
+Route::post('/cms/winners', [CmsController::class, 'winners'])->middleware(['auth']);
 
 require __DIR__.'/auth.php';
 
