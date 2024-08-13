@@ -17,7 +17,7 @@ class CreateApprovedEntries extends Migration
             $table->id();
             $table->unsignedBigInteger('entry_id');
             $table->foreign('entry_id')->references('id')->on('entries');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

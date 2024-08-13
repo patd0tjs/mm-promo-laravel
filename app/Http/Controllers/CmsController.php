@@ -105,12 +105,14 @@ class CmsController extends Controller
             "status" => "required"
         ]);
 
-        Entries::where('id', $_POST['id'])->update(['status' => $_POST['status']]);
+        $id = $request->input('id');
 
-        if($_POST['status'] == "1")
+        if($request->input('status') == 1)
         {
+            Entries::acceptEntry($id);
             $message = 'accepted';
         } else {
+            Entries::where('id', $id)->update(['status' => '2']);
             $message = 'rejected';
         }
 
