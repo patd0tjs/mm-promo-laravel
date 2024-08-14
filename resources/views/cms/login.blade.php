@@ -34,9 +34,9 @@
                                             @csrf
                                                           
                                             <div class="form-group">
-                                                <input type="email" class="form-control form-control-user"
-                                                    placeholder="Email"
-                                                    name="email">
+                                                <input type="text" class="form-control form-control-user"
+                                                    placeholder="Username"
+                                                    name="username">
                                             </div>
                                             <div class="form-group">
                                                 <input type="password" class="form-control form-control-user"
