@@ -25,16 +25,11 @@ class CmsController extends Controller
      */
 
     public function dashboard(Request $request, Entries $entries)
-    {
-        $entries = DB::table('entries')
-                        ->select(DB::raw('count(id) as total, date(created_at) as date'))
-                        ->where('status', '1')
-                        ->groupBy('date')
-                        ->get();
-
+    { 
         $data = [
             'page'    => 'Dashboard',
-            'entries' => $entries
+            'entries' => Entries::getByDate($request),
+            'areas'   => Entries::getByArea($request)
         ];
 
         return view('cms.dashboard', $data);
@@ -50,10 +45,11 @@ class CmsController extends Controller
         return view('cms.entries', $data);
     }
 
-    public function draw()
+    public function draw(Request $request)
     {
         $data = [
-            'page' => 'Draw Tool'
+            'page'    => 'Draw Tool',
+            'winners' => Entries::getWinners($request)
         ];
 
         return view('cms.draw', $data);
@@ -117,16 +113,6 @@ class CmsController extends Controller
         }
 
         return redirect('cms/entries')->with('message', $message);
-    }
-
-    public function winners(Request $request, Entries $entries)
-    {
-        $data = [
-            'page'    => 'Draw Tool',
-            'winners' => Entries::getWinners($request)
-        ];
-
-        return view('cms.winners', $data);
     }
 
     /**

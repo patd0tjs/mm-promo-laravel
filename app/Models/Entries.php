@@ -233,16 +233,16 @@ class Entries extends Model
         if($location != 'all'){
             $candidates = DB::table('approved_entries')
                                 ->join('entries', 'approved_entries.entry_id', '=', 'entries.id')
-                                ->whereRaw("DATE(entries.created_at) >= '". $s_date ." 00:00:00'")
-                                ->whereRaw("DATE(entries.created_at) <= '". $e_date ." 23:59:59'")
+                                ->whereRaw("entries.created_at >= '". $s_date ." 00:00:00'")
+                                ->whereRaw("entries.created_at <= '". $e_date ." 23:59:59'")
                                 ->where('entries.location', $location)
                                 ->get()
                                 ->toArray();
         } else {
             $candidates = DB::table('approved_entries')
                                 ->join('entries', 'approved_entries.entry_id', '=', 'entries.id')
-                                ->whereRaw("DATE(entries.created_at) >= '". $s_date ." 00:00:00'")
-                                ->whereRaw("DATE(entries.created_at) <= '". $e_date ." 23:59:59'")
+                                ->whereRaw("entries.created_at >= '". $s_date ." 00:00:00'")
+                                ->whereRaw("entries.created_at <= '". $e_date ." 23:59:59'")
                                 ->get()
                                 ->toArray();
         }
@@ -257,38 +257,67 @@ class Entries extends Model
     }
 
 
-    public function getByArea()
+    public static function getByArea($request)
     {
-        $this->db->select('count(approved_entries.id) as entries')
-                        ->select('entries.location as location');
 
-        if($this->input->post('start') && $this->input->post('end')){
-            $this->db->where('date(approved_entries.stamp) >=', $this->input->post('start'))
-                     ->where('date(approved_entries.stamp) <=', $this->input->post('end'));
-        }
-
-        if($this->input->post('region')){
-            if($this->input->post('region') != 'all'){
-                $this->db->where('entries.location', $this->input->post('region'));
+        if(isset($_POST['start']) && isset($_POST['end']) && isset($_POST['region']))
+        {
+            if($request->input('region') != 'all')
+            {
+                $entries = DB::table('approved_entries')
+                                ->join('entries', 'approved_entries.entry_id', '=', 'entries.id')
+                                ->select(DB::raw('count(approved_entries.id) as entries, entries.location as location'))
+                                ->whereRaw("entries.created_at >= '". $request->input('start') ." 00:00:00'")
+                                ->whereRaw("entries.created_at <= '". $request->input('end') ." 23:59:59'")
+                                ->where('entries.location', $request->input('region'))
+                                ->groupBy('location')
+                                ->get()
+                                ->toArray();
+            } else {
+                $entries = DB::table('approved_entries')
+                                ->join('entries', 'approved_entries.entry_id', '=', 'entries.id')
+                                ->select(DB::raw('count(approved_entries.id) as entries, entries.location as location'))
+                                ->whereRaw("entries.created_at >= '". $request->input('start') ." 00:00:00'")
+                                ->whereRaw("entries.created_at <= '". $request->input('end') ." 23:59:59'")
+                                ->groupBy('location')
+                                ->get()
+                                ->toArray();
             }
+        } else {
+            $entries = DB::table('approved_entries')
+                                ->join('entries', 'approved_entries.entry_id', '=', 'entries.id')
+                                ->select(DB::raw('count(approved_entries.id) as entries, entries.location as location'))
+                                ->groupBy('location')
+                                ->get()
+                                ->toArray();
         }
 
-        return $this->db->from('approved_entries')
-                        ->join('entries', 'approved_entries.entry_id=entries.id')
-                        ->group_by('entries.location')
-                        ->get()
-                        ->result_array();
+        return $entries;
     }
 
-    public function getByDate($request)
+    public static function getByDate($request)
     {
-        if($request->input('start') && $request->input('end'))
+        if(isset($_POST['start']) && isset($_POST['end']) && isset($_POST['region']))
         {
-            $entries = DB::table('entries')
-                            ->select(DB::raw('count(id) as total, date(created_at) as date'))
-                            ->where('status', '1')
-                            ->groupBy('date')
-                            ->get();
+            if($request->input('region') != 'all')
+            {
+                $entries = DB::table('entries')
+                                ->select(DB::raw('count(id) as total, date(created_at) as date'))
+                                ->where('status', '1')
+                                ->whereRaw("created_at >= '". $request->input('start') ." 00:00:00'")
+                                ->whereRaw("created_at <= '". $request->input('end') ." 23:59:59'")
+                                ->where("location", $request->input('region'))
+                                ->groupBy('date')
+                                ->get(); 
+            } else {
+                $entries = DB::table('entries')
+                                ->select(DB::raw('count(id) as total, date(created_at) as date'))
+                                ->where('status', '1')
+                                ->whereRaw("created_at >= '". $request->input('start') ." 00:00:00'")
+                                ->whereRaw("created_at <= '". $request->input('end') ." 23:59:59'")
+                                ->groupBy('date')
+                                ->get();
+            }
         } else {
             $entries = DB::table('entries')
                             ->select(DB::raw('count(id) as total, date(created_at) as date'))
@@ -296,7 +325,7 @@ class Entries extends Model
                             ->groupBy('date')
                             ->get();
         }
-
+        
         return $entries;
     }
 }

@@ -44,7 +44,7 @@
                         <span class="nav_logo-name">Mob1l Promo CMS</span>
                     </a>
                     <div class="nav_list">
-                        <a href="dashboard" class="nav_link {{ ($page == "Dashboard") ? 'active' : '' }}">
+                        <a href="{{ route('cms/dashboard') }}" class="nav_link {{ ($page == "Dashboard") ? 'active' : '' }}">
                             <i class='bx bx-grid-alt nav_icon'></i>
                             <span class="nav_name">Dashboard</span>
                         </a>

@@ -8,24 +8,29 @@
 
 @section('content')
     <center>
-        <form action="dashboard" method="post" style="width: 60%">
+        <form action="{{ route('cms/dashboard') }}" method="post" style="width: 60%">
+            @csrf
+
             <div class="row">
                 <div class="col">
                     <label for="">Start Date:</label>
-                    <input type="date" name="start" value="<{{ (isset($_POST['start'])) ? $_POST['start'] : '';}}" class="form-control" required>
+                    <input type="date" name="start" value="{{ (isset($_POST['start'])) ? $_POST['start'] : ''}}" class="form-control" required>
                 </div>
                 <div class="col">
                 <label for="">End Date:</label>
-                    <input type="date" name="end" value="<{{ (isset($_POST['end'])) ? $_POST['end'] : '';}}" class="form-control" required>
+                    <input type="date" name="end" value="{{ (isset($_POST['end'])) ? $_POST['end'] : ''}}" class="form-control" required>
                 </div>
                 <div class="col">
                     <label for="">Location:</label>
-                    <select name="region" class="form-control">
-                        <?php if(isset($_POST['region'])){?>
-                            <option value="<{{ $_POST['region']}}" selected><{{ strtoupper($_POST['region'])}}</option>
-                        <?php } else {?>
+                    <select name="region" class="form-control" required>
+
+                        @if(isset($_POST['region']))
+                            <option value="{{ $_POST['region']}}" selected hidden>{{ strtoupper($_POST['region'])}}</option>
+                            <option value="all">ALL</option>
+                        @else
                             <option value="all" selected>ALL</option>
-                        <?php }?>
+                        @endif
+
                         <option value="ncr">NCR</option>
                         <option value="luzon">LUZON</option>
                         <option value="visayas">VISAYAS</option>
@@ -114,7 +119,13 @@
                     name: 'Registrants',
                     colorByPoint: true,
                     data: [
-
+                        @foreach($areas as $area)
+                        {
+                            name: "{{ strtoupper($area->location) }}",
+                            y: {{ $area->entries}},
+                            drilldown: "{{ strtoupper($area->location) }}"
+                        },
+                        @endforeach
                     ]
                 }
             ],

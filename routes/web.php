@@ -25,11 +25,11 @@ Route::get('/mechanics', [PromoController::class, 'mechanics']);
 Route::resource('promo', PromoController::class);
 
 // cms routes
-Route::get('/cms/dashboard', [CmsController::class, 'dashboard'])->middleware(['auth']);
-Route::get('/cms/dashboard/filtered', [CmsController::class, 'dashboard'])->middleware(['auth']);
-Route::get('/cms/entries', [CmsController::class, 'entries'])->middleware(['auth']);
-Route::get('/cms/draw', [CmsController::class, 'draw'])->middleware(['auth']);
-Route::post('/cms/winners', [CmsController::class, 'winners'])->middleware(['auth']);
+Route::get('/cms/dashboard', [CmsController::class, 'dashboard'])->name('cms/dashboard')->middleware(['auth']);
+Route::post('/cms/dashboard', [CmsController::class, 'dashboard'])->name('cms/dashboard')->middleware(['auth']);
+Route::get('/cms/entries', [CmsController::class, 'entries'])->name('cms/entries')->middleware(['auth']);
+Route::get('/cms/draw', [CmsController::class, 'draw'])->name('cms/draw')->middleware(['auth']);
+Route::post('/cms/draw', [CmsController::class, 'draw'])->name('cms/draw')->middleware(['auth']);
 
 require __DIR__.'/auth.php';
 
