@@ -115,7 +115,7 @@ class Entries extends Model
     /////////////////////
 
     // add user entry
-    public function join($request)
+    public static function join($request)
     {
         // receipt uploader
         $receipt = $request->file('receipt');
@@ -158,7 +158,7 @@ class Entries extends Model
     ///////////////////
 
     // add entry to raffle
-    public function acceptEntry($id)
+    public static function accept($id)
     {
         $purchases = Entries::getPurchaseQuantity($id);
         $racing    = $purchases->has_racing;
@@ -191,7 +191,7 @@ class Entries extends Model
     }
 
     // return winnerss
-    public function getWinners($request){
+    public static function getWinners($request){
         $candidates = Entries::getCandidates($request);
         $winner_count = $request->input('winner_count');
 
@@ -254,5 +254,49 @@ class Entries extends Model
         } else {
             return FALSE;
         }
+    }
+
+
+    public function getByArea()
+    {
+        $this->db->select('count(approved_entries.id) as entries')
+                        ->select('entries.location as location');
+
+        if($this->input->post('start') && $this->input->post('end')){
+            $this->db->where('date(approved_entries.stamp) >=', $this->input->post('start'))
+                     ->where('date(approved_entries.stamp) <=', $this->input->post('end'));
+        }
+
+        if($this->input->post('region')){
+            if($this->input->post('region') != 'all'){
+                $this->db->where('entries.location', $this->input->post('region'));
+            }
+        }
+
+        return $this->db->from('approved_entries')
+                        ->join('entries', 'approved_entries.entry_id=entries.id')
+                        ->group_by('entries.location')
+                        ->get()
+                        ->result_array();
+    }
+
+    public function getByDate($request)
+    {
+        if($request->input('start') && $request->input('end'))
+        {
+            $entries = DB::table('entries')
+                            ->select(DB::raw('count(id) as total, date(created_at) as date'))
+                            ->where('status', '1')
+                            ->groupBy('date')
+                            ->get();
+        } else {
+            $entries = DB::table('entries')
+                            ->select(DB::raw('count(id) as total, date(created_at) as date'))
+                            ->where('status', '1')
+                            ->groupBy('date')
+                            ->get();
+        }
+
+        return $entries;
     }
 }

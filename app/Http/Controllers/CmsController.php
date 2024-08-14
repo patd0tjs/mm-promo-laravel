@@ -24,7 +24,7 @@ class CmsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function dashboard()
+    public function dashboard(Request $request, Entries $entries)
     {
         $entries = DB::table('entries')
                         ->select(DB::raw('count(id) as total, date(created_at) as date'))
@@ -109,7 +109,7 @@ class CmsController extends Controller
 
         if($request->input('status') == 1)
         {
-            Entries::acceptEntry($id);
+            Entries::accept($id);
             $message = 'accepted';
         } else {
             Entries::where('id', $id)->update(['status' => '2']);
