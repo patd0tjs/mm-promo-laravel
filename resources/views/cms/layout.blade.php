@@ -48,11 +48,11 @@
                             <i class='bx bx-grid-alt nav_icon'></i>
                             <span class="nav_name">Dashboard</span>
                         </a>
-                        <a href="entries" class="nav_link {{ ($page == "Entries") ? 'active' : '' }}">
+                        <a href="{{ route('cms/entries') }}" class="nav_link {{ ($page == "Entries") ? 'active' : '' }}">
                             <i class='bx bx-user nav_icon'></i>
                             <span class="nav_name">Entries</span>
                         </a>
-                        <a href="draw" class="nav_link {{ ($page == "Draw Tool") ? 'active' : '' }}">
+                        <a href="{{ route('cms/draw') }}" class="nav_link {{ ($page == "Draw Tool") ? 'active' : '' }}">
                             <i class='bx bx-message-square-detail nav_icon'></i>
                             <span class="nav_name">Draw Tool</span>
                         </a>
